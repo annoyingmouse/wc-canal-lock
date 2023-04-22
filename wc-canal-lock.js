@@ -5,20 +5,17 @@ class WCCanalLock extends HTMLElement {
     this.shadow = this.attachShadow({
       mode: 'open'
     })
-    this.speed = 20
+    this.speed = 5
     this.boatX = 30
     this.boatY = 130
   }
-
   set moving(value) {
     this.#moving = value
     this.checkButtons()
   }
-
   get moving() {
     return this.#moving
   }
-
   gatesAndSluicesClosed() {
     return (
       !this.moving
@@ -32,7 +29,6 @@ class WCCanalLock extends HTMLElement {
       this.rightSluice.dataset.status === 'closed'
     )
   }
-
   rightSluiceOpen() {
     return (
       !this.moving
@@ -40,7 +36,6 @@ class WCCanalLock extends HTMLElement {
       this.rightSluice.dataset.status === 'open'
     )
   }
-
   leftSluiceOpen() {
     return (
       !this.moving
@@ -48,7 +43,6 @@ class WCCanalLock extends HTMLElement {
       this.leftSluice.dataset.status === 'open'
     )
   }
-
   waterLowAndGatesAndSluicesClosed() {
     return (
       this.water.dataset.level === 'low'
@@ -56,7 +50,6 @@ class WCCanalLock extends HTMLElement {
       this.gatesAndSluicesClosed()
     )
   }
-
   waterHighAndGatesAndSluicesClosed() {
     return (
       this.water.dataset.level === 'high'
@@ -64,7 +57,6 @@ class WCCanalLock extends HTMLElement {
       this.gatesAndSluicesClosed()
     )
   }
-
   waterHighAndLeftGateOpen() {
     return (
       !this.moving
@@ -80,7 +72,6 @@ class WCCanalLock extends HTMLElement {
       this.rightSluice.dataset.status === 'closed'
     )
   }
-
   waterLowAndRightGateOpen() {
     return (
       !this.moving
@@ -96,7 +87,6 @@ class WCCanalLock extends HTMLElement {
       this.rightSluice.dataset.status === 'closed'
     )
   }
-
   canMoveLeft() {
     return (
       !this.moving
@@ -122,7 +112,6 @@ class WCCanalLock extends HTMLElement {
       )
     )
   }
-
   canMoveRight() {
     return (
       !this.moving
@@ -148,9 +137,7 @@ class WCCanalLock extends HTMLElement {
       )
     )
   }
-
   checkButtons() {
-
     this.openLeftSluiceButton.setAttribute('fill-opacity', this.gatesAndSluicesClosed() ? '0' : '0.5')
     this.openRightSluiceButton.setAttribute('fill-opacity', this.gatesAndSluicesClosed() ? '0' : '0.5')
     if(this.gatesAndSluicesClosed()){
@@ -160,79 +147,67 @@ class WCCanalLock extends HTMLElement {
       this.openLeftSluiceButton.parentNode.classList.add('not-allowed')
       this.openRightSluiceButton.parentNode.classList.add('not-allowed')
     }
-
     this.closeRightSluiceButton.setAttribute('fill-opacity', this.rightSluiceOpen() ? '0' : '0.5')
     if(this.rightSluiceOpen()) {
       this.closeRightSluiceButton.parentNode.classList.remove('not-allowed')
     } else {
       this.closeRightSluiceButton.parentNode.classList.add('not-allowed')
     }
-
     this.closeLeftSluiceButton.setAttribute('fill-opacity', this.leftSluiceOpen() ? '0' : '0.5')
     if(this.leftSluiceOpen()) {
       this.closeLeftSluiceButton.parentNode.classList.remove('not-allowed')
     } else {
       this.closeLeftSluiceButton.parentNode.classList.add('not-allowed')
     }
-
     this.openRightGateButton.setAttribute('fill-opacity', this.waterLowAndGatesAndSluicesClosed() ? '0' : '0.5')
     if(this.waterLowAndGatesAndSluicesClosed()) {
       this.openRightGateButton.parentNode.classList.remove('not-allowed')
     } else {
       this.openRightGateButton.parentNode.classList.add('not-allowed')
     }
-
     this.openLeftGateButton.setAttribute('fill-opacity', this.waterHighAndGatesAndSluicesClosed() ? '0' : '0.5')
     if(this.waterHighAndGatesAndSluicesClosed()) {
       this.openLeftGateButton.parentNode.classList.remove('not-allowed')
     } else {
       this.openLeftGateButton.parentNode.classList.add('not-allowed')
     }
-
     this.openLeftGateButton.setAttribute('fill-opacity', this.waterHighAndGatesAndSluicesClosed() ? '0' : '0.5')
     if(this.waterHighAndGatesAndSluicesClosed()) {
       this.openLeftGateButton.parentNode.classList.remove('not-allowed')
     } else {
       this.openLeftGateButton.parentNode.classList.add('not-allowed')
     }
-
     this.closeLeftGateButton.setAttribute('fill-opacity', this.waterHighAndLeftGateOpen() ? '0' : '0.5')
     if(this.waterHighAndLeftGateOpen()) {
       this.closeLeftGateButton.parentNode.classList.remove('not-allowed')
     } else {
       this.closeLeftGateButton.parentNode.classList.add('not-allowed')
     }
-
     this.openRightGateButton.setAttribute('fill-opacity', this.waterLowAndGatesAndSluicesClosed() ? '0' : '0.5')
     if(this.waterLowAndGatesAndSluicesClosed()) {
       this.openRightGateButton.parentNode.classList.remove('not-allowed')
     } else {
       this.openRightGateButton.parentNode.classList.add('not-allowed')
     }
-
     this.closeRightGateButton.setAttribute('fill-opacity', this.waterLowAndRightGateOpen() ? '0' : '0.5')
     if(this.waterLowAndRightGateOpen()) {
       this.closeRightGateButton.parentNode.classList.remove('not-allowed')
     } else {
       this.closeRightGateButton.parentNode.classList.add('not-allowed')
     }
-
     this.moveLeftButton.setAttribute('fill-opacity', this.canMoveLeft() ? '0' : '0.5')
     if(this.canMoveLeft()) {
       this.moveLeftButton.parentNode.classList.remove('not-allowed')
     } else {
       this.moveLeftButton.parentNode.classList.add('not-allowed')
     }
-
     this.moveRightButton.setAttribute('fill-opacity', this.canMoveRight() ? '0' : '0.5')
     if(this.canMoveRight()) {
       this.moveRightButton.parentNode.classList.remove('not-allowed')
     } else {
       this.moveRightButton.parentNode.classList.add('not-allowed')
     }
-
   }
-
   get css() {
     return `
       <style>
@@ -245,7 +220,6 @@ class WCCanalLock extends HTMLElement {
       </style>
     `
   }
-
   get svg() {
     return `
       <svg height="auto"
@@ -360,7 +334,6 @@ class WCCanalLock extends HTMLElement {
       </svg>
     `
   }
-
   updateBoat(x, y) {
     this.boat.setAttribute('d', `
       M ${x}, ${y}
@@ -373,304 +346,180 @@ class WCCanalLock extends HTMLElement {
       L ${x + 10}, ${y + 10}
     `)
   }
-
+  generateIncrementFunction(var1, var2, action, condition, speed) {
+    return () => {
+      let counter = 0
+      while(var1 <= var2) {
+        ((i, c) => {
+          setTimeout(() => {
+            action(i)
+            condition(i, var2)
+          }, speed * c)
+        })(var1++, counter++)
+      }
+    }
+  }
+  generateDecrementFunction(var1, var2, action, condition, speed) {
+    return () => {
+      let counter = 0
+      while(var1 >= var2) {
+        ((i, c) => {
+          setTimeout(() => {
+            action(i)
+            condition(i, var2)
+          }, speed * c)
+        })(var1--, counter++)
+      }
+    }
+  }
   moveLeft() {
     if(this.canMoveLeft()) {
       this.moving = true
-      const target = this.boat.dataset.position === 'middle' ? 30 : 250
-      let counter = 0
-      while(this.boatX >= target) {
-        ((i, c) => {
-          setTimeout(() => {
-            this.updateBoat(i, this.boatY)
-            if(i === target) {
-              this.boat.dataset.position = target === 30 ? 'left' : 'middle'
-              this.moving = false
-            }
-          }, this.speed * c)
-        })(this.boatX--, counter++)
-      }
+      this.generateDecrementFunction(this.boatX, this.boat.dataset.position === 'middle' ? 30 : 250, (i) => this.updateBoat(i, this.boatY), (i, var2) => {
+        if(i === var2) {
+          this.boatX = i
+          this.boat.dataset.position = var2 === 30 ? 'left' : 'middle'
+          this.moving = false
+        }
+      }, this.speed)()
     }
   }
   moveRight() {
     if(this.canMoveRight()) {
       this.moving = true
-      const target = this.boat.dataset.position === 'left' ? 250 : 470
-      let counter = 0
-      while(this.boatX <= target) {
-        ((i, c) => {
-          setTimeout(() => {
-            this.updateBoat(i, this.boatY)
-            if(i === target) {
-              this.boatX = i
-              this.boat.dataset.position = target === 250 ? 'middle' : 'right'
-              this.moving = false
-            }
-          }, this.speed * c)
-        })(this.boatX++, counter++)
-      }
+      this.generateIncrementFunction(this.boatX, this.boat.dataset.position === 'left' ? 250 : 470, (i) => this.updateBoat(i, this.boatY), (i, var2) => {
+        if(i === var2) {
+          this.boatX = i
+          this.boat.dataset.position = var2 === 250 ? 'middle' : 'right'
+          this.moving = false
+        }
+      }, this.speed)()
     }
   }
-
   openLeftGate() {
     if(this.waterHighAndGatesAndSluicesClosed()) {
       this.moving = true
-      const target = 60
-      let gateWidth = this.leftGate.width.baseVal.value
-      let counter = 0
-      while(gateWidth <= target) {
-        ((i, c) => {
-          setTimeout(() => {
-            this.leftGate.width.baseVal.value = i
-            if(i === target) {
-              this.leftGate.dataset.status = 'open'
-              this.moving = false
-            }
-          }, this.speed * c)
-        })(gateWidth++, counter++)
-      }
+      this.generateIncrementFunction(this.leftGate.width.baseVal.value, 60, (i) => this.leftGate.width.baseVal.value = i, (i, var2) => {
+        if(i === var2) {
+          this.leftGate.dataset.status = 'open'
+          this.moving = false
+        }
+      }, this.speed)()
     }
   }
   closeLeftGate() {
     if(this.waterHighAndLeftGateOpen()) {
       this.moving = true
-      const target = 0
-      let gateWidth = this.leftGate.width.baseVal.value
-      let counter = 0
-      while(gateWidth >= target) {
-        ((i, c) => {
-          setTimeout(() => {
-            this.leftGate.width.baseVal.value = i
-            if(i === target) {
-              this.leftGate.dataset.status = 'closed'
-              this.moving = false
-            }
-          }, this.speed * c)
-        })(gateWidth--, counter++)
-      }
+      this.generateDecrementFunction(this.leftGate.width.baseVal.value, 0, (i) => this.leftGate.width.baseVal.value = i, (i, var2) => {
+        if(i === var2) {
+          this.leftGate.dataset.status = 'closed'
+          this.moving = false
+        }
+      }, this.speed)()
     }
   }
-
   openRightGate() {
     if(this.waterLowAndGatesAndSluicesClosed()) {
       this.moving = true
-      const target = 60
-      let gateWidth = this.rightGate.width.baseVal.value
-      let counter = 0
-      while(gateWidth <= target) {
-        ((i, c) => {
-          setTimeout(() => {
-            this.rightGate.width.baseVal.value = i
-            if(i === target) {
-              this.rightGate.dataset.status = 'open'
-              this.moving = false
-            }
-          }, this.speed * c)
-        })(gateWidth++, counter++)
-      }
+      this.generateIncrementFunction(this.rightGate.width.baseVal.value, 60, (i) => this.rightGate.width.baseVal.value = i, (i, var2) => {
+        if(i === var2) {
+          this.rightGate.dataset.status = 'open'
+          this.moving = false
+        }
+      }, this.speed)()
     }
   }
   closeRightGate() {
     if(this.waterLowAndRightGateOpen()) {
       this.moving = true
-      const target = 0
-      let gateWidth = this.rightGate.width.baseVal.value
-      let counter = 0
-      while(gateWidth >= target) {
-        ((i, c) => {
-          setTimeout(() => {
-            this.rightGate.width.baseVal.value = i
-            if(i === target) {
-              this.rightGate.dataset.status = 'closed'
-              this.moving = false
-            }
-          }, this.speed * c)
-        })(gateWidth--, counter++)
-      }
+      this.generateDecrementFunction(this.rightGate.width.baseVal.value, 0, (i) => this.rightGate.width.baseVal.value = i, (i, var2) => {
+        if(i === var2) {
+          this.rightGate.dataset.status = 'closed'
+          this.moving = false
+        }
+      }, this.speed)()
     }
   }
-
   openLeftSluice() {
     if(this.gatesAndSluicesClosed()) {
       this.moving = true
-      let sluiceCounter = 0
-      const sluiceTarget = 160
-      let sluiceHeight = this.leftSluice.height.baseVal.value
-
-      let waterYCounter = 0
-      const waterYTarget = 140
-      let waterY = this.water.y.baseVal.value
-
-      let boatYCounter = 0
-      const boatYTarget = 130
-      let boatY = this.boatY
-
-      let waterHeightCounter = 0
-      const waterHeightTarget = 220
-      let waterHeight = this.water.height.baseVal.value
-
-      while(sluiceHeight >= sluiceTarget) {
-        ((i, c) => {
-          setTimeout(() => {
-            this.leftSluice.height.baseVal.value = i
-            if(i === sluiceTarget) {
-              this.leftSluice.dataset.status = 'open'
-              if(this.water.dataset.level === 'high') {
-                this.moving = false
-              }
-            }
-          }, this.speed * c)
-        })(sluiceHeight--, sluiceCounter++)
-      }
-
-      while(waterY >= waterYTarget) {
-        ((i, c) => {
-          setTimeout(() => {
-            this.water.y.baseVal.value = i
-          }, this.speed * c)
-        })(waterY--, waterYCounter++)
-      }
-
-      while(waterHeight <= waterHeightTarget) {
-        ((i, c) => {
-          setTimeout(() => {
-            this.water.height.baseVal.value = i
-            if(i === waterHeightTarget) {
-              this.water.dataset.level = 'high'
-              if(this.leftSluice.dataset.status === 'open') {
-                this.moving = false
-              }
-            }
-          }, this.speed * c)
-        })(waterHeight++, waterHeightCounter++)
-      }
-
-      if(this.boat.dataset.position === 'middle'){
-
-        while(boatY >= boatYTarget) {
-          ((i, c) => {
-            setTimeout(() => {
-              this.updateBoat(this.boatX, i)
-              if(i === boatYTarget) {
-                this.boatY = i
-              }
-            }, this.speed * c)
-          })(boatY--, boatYCounter++)
+      this.generateDecrementFunction(this.leftSluice.height.baseVal.value, 160, (i) => this.leftSluice.height.baseVal.value = i, (i, var2) => {
+        if(i === var2) {
+          this.leftSluice.dataset.status = 'open'
+          if(this.water.dataset.level === 'high') {
+            this.moving = false
+          }
         }
+      }, this.speed)()
+      this.generateDecrementFunction(this.water.y.baseVal.value, 140, (i) => this.water.y.baseVal.value = i, () => {}, this.speed)()
+      this.generateIncrementFunction(this.water.height.baseVal.value, 220, (i) => this.water.height.baseVal.value = i, (i, var2) => {
+        if(i === var2) {
+          this.water.dataset.level = 'high'
+          if(this.leftSluice.dataset.status === 'open') {
+            this.moving = false
+          }
+        }
+      }, this.speed)()
+      if(this.boat.dataset.position === 'middle'){
+        this.generateDecrementFunction(this.boatY, 130, (i) => this.updateBoat(this.boatX, i), (i, var2) => {
+          if(i === var2) {
+            this.boatY = i
+          }
+        }, this.speed)()
       }
     }
   }
   closeLeftSluice() {
     if(this.leftSluiceOpen()) {
       this.moving = true
-      const target = 190
-      let sluiceHeight = this.leftSluice.height.baseVal.value
-      let counter = 0
-      while(sluiceHeight <= target) {
-        ((i, c) => {
-          setTimeout(() => {
-            this.leftSluice.height.baseVal.value = i
-            if(i === target) {
-              this.leftSluice.dataset.status = 'closed'
-              this.moving = false
-            }
-          }, this.speed * c)
-        })(sluiceHeight++, counter++)
-      }
+      this.generateIncrementFunction(this.leftSluice.height.baseVal.value, 190, (i) => this.leftSluice.height.baseVal.value = i, (i, var2) => {
+        if(i === var2) {
+          this.leftSluice.dataset.status = 'closed'
+          this.moving = false
+        }
+      }, this.speed)()
     }
   }
-
   openRightSluice() {
     if(this.gatesAndSluicesClosed()) {
-
       this.moving = true
-      let sluiceCounter = 0
-      const sluiceTarget = 160
-      let sluiceHeight = this.rightSluice.height.baseVal.value
-
-      let waterYCounter = 0
-      const waterYTarget = 200
-      let waterY = this.water.y.baseVal.value
-
-      let boatYCounter = 0
-      const boatYTarget = 190
-      let boatY = this.boatY
-
-      let waterHeightCounter = 0
-      const waterHeightTarget = 160
-      let waterHeight = this.water.height.baseVal.value
-
-      while(waterY <= waterYTarget) {
-        ((i, c) => {
-          setTimeout(() => {
-            this.water.y.baseVal.value = i
-          }, this.speed * c)
-        })(waterY++, waterYCounter++)
-      }
-
-      while(waterHeight >= waterHeightTarget) {
-        ((i, c) => {
-          setTimeout(() => {
-            this.water.height.baseVal.value = i
-            if(i === waterHeightTarget) {
-              this.water.dataset.level = 'low'
-              if(this.rightSluice.dataset.status === 'open') {
-                this.moving = false
-              }
-            }
-          }, this.speed * c)
-        })(waterHeight--, waterHeightCounter++)
-      }
-
-      while(sluiceHeight >= sluiceTarget) {
-        ((i, c) => {
-          setTimeout(() => {
-            this.rightSluice.height.baseVal.value = i
-            if(i === sluiceTarget) {
-              this.rightSluice.dataset.status = 'open'
-              if(this.water.dataset.level === 'low') {
-                this.moving = false
-              }
-            }
-          }, this.speed * c)
-        })(sluiceHeight--, sluiceCounter++)
-      }
-
-      if(this.boat.dataset.position === 'middle'){
-
-        while(boatY <= boatYTarget) {
-          ((i, c) => {
-            setTimeout(() => {
-              this.updateBoat(this.boatX, i)
-              if(i === boatYTarget) {
-                this.boatY = i
-              }
-            }, this.speed * c)
-          })(boatY++, boatYCounter++)
+      this.generateIncrementFunction(this.water.y.baseVal.value, 200, (i) => this.water.y.baseVal.value = i, () => {}, this.speed)()
+      this.generateDecrementFunction(this.water.height.baseVal.value, 160, (i) => this.water.height.baseVal.value = i, (i, var2) => {
+        if(i === var2) {
+          this.water.dataset.level = 'low'
+          if(this.rightSluice.dataset.status === 'open') {
+            this.moving = false
+          }
         }
+      }, this.speed)()
+      this.generateDecrementFunction(this.rightSluice.height.baseVal.value, 160, (i) => this.rightSluice.height.baseVal.value = i, (i, var2) => {
+        if(i === var2) {
+          this.rightSluice.dataset.status = 'open'
+          if(this.water.dataset.level === 'low') {
+            this.moving = false
+          }
+        }
+      }, this.speed)()
+      if(this.boat.dataset.position === 'middle'){
+        this.generateIncrementFunction(this.boatY, 190, (i) => this.updateBoat(this.boatX, i), (i, var2) => {
+          if(i === var2) {
+            this.boatY = i
+          }
+        }, this.speed)()
       }
     }
   }
   closeRightSluice() {
     if(this.rightSluiceOpen()) {
       this.moving = true
-      const target = 190
-      let sluiceHeight = this.rightSluice.height.baseVal.value
-      let counter = 0
-      while(sluiceHeight <= target) {
-        ((i, c) => {
-          setTimeout(() => {
-            this.rightSluice.height.baseVal.value = i
-            if(i === target) {
-              this.rightSluice.dataset.status = 'closed'
-              this.moving = false
-            }
-          }, this.speed * c)
-        })(sluiceHeight++, counter++)
-      }
+      this.generateIncrementFunction(this.rightSluice.height.baseVal.value, 190, (i) => this.rightSluice.height.baseVal.value = i, (i, var2) => {
+        if(i === var2) {
+          this.rightSluice.dataset.status = 'closed'
+          this.moving = false
+        }
+      }, this.speed)()
     }
   }
-
   connectedCallback() {
     this.render()
     this.boat = this.shadow.querySelector('#boat')
@@ -679,7 +528,6 @@ class WCCanalLock extends HTMLElement {
     this.leftSluice = this.shadow.querySelector('#leftSluice')
     this.rightSluice = this.shadow.querySelector('#rightSluice')
     this.water = this.shadow.querySelector('#water')
-
     this.closeLeftSluiceButton = this.shadow.querySelector('#closeLeftSluice')
     this.closeRightSluiceButton = this.shadow.querySelector('#closeRightSluice')
     this.openLeftSluiceButton = this.shadow.querySelector('#openLeftSluice')
@@ -691,15 +539,11 @@ class WCCanalLock extends HTMLElement {
     this.moveLeftButton = this.shadow.querySelector('#moveLeft')
     this.moveRightButton = this.shadow.querySelector('#moveRight')
     this.buttons = this.shadow.querySelectorAll('.button')
-
     this.moving = false
     this.checkButtons()
   }
-
   render() {
     this.shadow.innerHTML = `${this.css}${this.svg}`
   }
-
 }
-
 window.customElements.define('wc-canal-lock', WCCanalLock)
