@@ -1,6 +1,6 @@
 {
   "name": "@annoyingmouse/wc-canal-lock",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "This web component creates a canal lock simulator.",
   "main": "wc-canal-lock.js",
   "scripts": {
